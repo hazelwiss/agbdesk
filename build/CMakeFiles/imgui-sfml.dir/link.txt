@@ -1,2 +1,0 @@
-/usr/bin/ar qc ../bin/lib/libimgui-sfml.a CMakeFiles/imgui-sfml.dir/deps/imgui-sfml/imgui-SFML.cpp.o
-/usr/bin/ranlib ../bin/lib/libimgui-sfml.a

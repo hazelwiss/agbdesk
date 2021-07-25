@@ -1,1 +1,0 @@
-/usr/bin/c++  -g -O0 -Wall CMakeFiles/agbdesk.dir/src/main.cpp.o -o ../bin/agbdesk  ../bin/lib/libimgui.a ../bin/lib/libimgui-sfml.a -lsfml-graphics -lsfml-window -lsfml-system -lGL 
