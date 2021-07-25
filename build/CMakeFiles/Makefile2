@@ -73,6 +73,8 @@ CMAKE_BINARY_DIR = /home/nibbyt/Projects/emulators/agbdesk/build
 
 # The main recursive "all" target.
 all: CMakeFiles/agbdesk.dir/all
+all: CMakeFiles/imgui-sfml.dir/all
+all: CMakeFiles/imgui.dir/all
 
 .PHONY : all
 
@@ -83,6 +85,8 @@ preinstall:
 
 # The main recursive "clean" target.
 clean: CMakeFiles/agbdesk.dir/clean
+clean: CMakeFiles/imgui-sfml.dir/clean
+clean: CMakeFiles/imgui.dir/clean
 
 .PHONY : clean
 
@@ -90,7 +94,8 @@ clean: CMakeFiles/agbdesk.dir/clean
 # Target rules for target CMakeFiles/agbdesk.dir
 
 # All Build rule for target.
-CMakeFiles/agbdesk.dir/all:
+CMakeFiles/agbdesk.dir/all: CMakeFiles/imgui-sfml.dir/all
+CMakeFiles/agbdesk.dir/all: CMakeFiles/imgui.dir/all
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/build
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=1,2 "Built target agbdesk"
@@ -98,7 +103,7 @@ CMakeFiles/agbdesk.dir/all:
 
 # Build rule for subdir invocation for target.
 CMakeFiles/agbdesk.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 10
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/agbdesk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 0
 .PHONY : CMakeFiles/agbdesk.dir/rule
@@ -112,6 +117,60 @@ agbdesk: CMakeFiles/agbdesk.dir/rule
 CMakeFiles/agbdesk.dir/clean:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/clean
 .PHONY : CMakeFiles/agbdesk.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/imgui-sfml.dir
+
+# All Build rule for target.
+CMakeFiles/imgui-sfml.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=9,10 "Built target imgui-sfml"
+.PHONY : CMakeFiles/imgui-sfml.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/imgui-sfml.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 2
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/imgui-sfml.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 0
+.PHONY : CMakeFiles/imgui-sfml.dir/rule
+
+# Convenience name for target.
+imgui-sfml: CMakeFiles/imgui-sfml.dir/rule
+
+.PHONY : imgui-sfml
+
+# clean rule for target.
+CMakeFiles/imgui-sfml.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/clean
+.PHONY : CMakeFiles/imgui-sfml.dir/clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/imgui.dir
+
+# All Build rule for target.
+CMakeFiles/imgui.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=3,4,5,6,7,8 "Built target imgui"
+.PHONY : CMakeFiles/imgui.dir/all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/imgui.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 6
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/imgui.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 0
+.PHONY : CMakeFiles/imgui.dir/rule
+
+# Convenience name for target.
+imgui: CMakeFiles/imgui.dir/rule
+
+.PHONY : imgui
+
+# clean rule for target.
+CMakeFiles/imgui.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/clean
+.PHONY : CMakeFiles/imgui.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

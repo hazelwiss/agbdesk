@@ -75,17 +75,6 @@ CMAKE_BINARY_DIR = /home/nibbyt/Projects/emulators/agbdesk/build
 #=============================================================================
 # Targets provided globally by CMake.
 
-# Special rule for the target rebuild_cache
-rebuild_cache:
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
-.PHONY : rebuild_cache
-
-# Special rule for the target rebuild_cache
-rebuild_cache/fast: rebuild_cache
-
-.PHONY : rebuild_cache/fast
-
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
@@ -96,6 +85,17 @@ edit_cache:
 edit_cache/fast: edit_cache
 
 .PHONY : edit_cache/fast
+
+# Special rule for the target rebuild_cache
+rebuild_cache:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
+	/usr/bin/cmake --regenerate-during-build -S$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+.PHONY : rebuild_cache
+
+# Special rule for the target rebuild_cache
+rebuild_cache/fast: rebuild_cache
+
+.PHONY : rebuild_cache/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -142,6 +142,194 @@ agbdesk/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/build
 .PHONY : agbdesk/fast
 
+#=============================================================================
+# Target rules for targets named imgui-sfml
+
+# Build rule for target.
+imgui-sfml: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui-sfml
+.PHONY : imgui-sfml
+
+# fast build rule for target.
+imgui-sfml/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/build
+.PHONY : imgui-sfml/fast
+
+#=============================================================================
+# Target rules for targets named imgui
+
+# Build rule for target.
+imgui: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 imgui
+.PHONY : imgui
+
+# fast build rule for target.
+imgui/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/build
+.PHONY : imgui/fast
+
+deps/imgui-sfml/imgui-SFML.o: deps/imgui-sfml/imgui-SFML.cpp.o
+
+.PHONY : deps/imgui-sfml/imgui-SFML.o
+
+# target to build an object file
+deps/imgui-sfml/imgui-SFML.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/deps/imgui-sfml/imgui-SFML.cpp.o
+.PHONY : deps/imgui-sfml/imgui-SFML.cpp.o
+
+deps/imgui-sfml/imgui-SFML.i: deps/imgui-sfml/imgui-SFML.cpp.i
+
+.PHONY : deps/imgui-sfml/imgui-SFML.i
+
+# target to preprocess a source file
+deps/imgui-sfml/imgui-SFML.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/deps/imgui-sfml/imgui-SFML.cpp.i
+.PHONY : deps/imgui-sfml/imgui-SFML.cpp.i
+
+deps/imgui-sfml/imgui-SFML.s: deps/imgui-sfml/imgui-SFML.cpp.s
+
+.PHONY : deps/imgui-sfml/imgui-SFML.s
+
+# target to generate assembly for a file
+deps/imgui-sfml/imgui-SFML.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui-sfml.dir/build.make CMakeFiles/imgui-sfml.dir/deps/imgui-sfml/imgui-SFML.cpp.s
+.PHONY : deps/imgui-sfml/imgui-SFML.cpp.s
+
+deps/imgui/imgui.o: deps/imgui/imgui.cpp.o
+
+.PHONY : deps/imgui/imgui.o
+
+# target to build an object file
+deps/imgui/imgui.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui.cpp.o
+.PHONY : deps/imgui/imgui.cpp.o
+
+deps/imgui/imgui.i: deps/imgui/imgui.cpp.i
+
+.PHONY : deps/imgui/imgui.i
+
+# target to preprocess a source file
+deps/imgui/imgui.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui.cpp.i
+.PHONY : deps/imgui/imgui.cpp.i
+
+deps/imgui/imgui.s: deps/imgui/imgui.cpp.s
+
+.PHONY : deps/imgui/imgui.s
+
+# target to generate assembly for a file
+deps/imgui/imgui.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui.cpp.s
+.PHONY : deps/imgui/imgui.cpp.s
+
+deps/imgui/imgui_demo.o: deps/imgui/imgui_demo.cpp.o
+
+.PHONY : deps/imgui/imgui_demo.o
+
+# target to build an object file
+deps/imgui/imgui_demo.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_demo.cpp.o
+.PHONY : deps/imgui/imgui_demo.cpp.o
+
+deps/imgui/imgui_demo.i: deps/imgui/imgui_demo.cpp.i
+
+.PHONY : deps/imgui/imgui_demo.i
+
+# target to preprocess a source file
+deps/imgui/imgui_demo.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_demo.cpp.i
+.PHONY : deps/imgui/imgui_demo.cpp.i
+
+deps/imgui/imgui_demo.s: deps/imgui/imgui_demo.cpp.s
+
+.PHONY : deps/imgui/imgui_demo.s
+
+# target to generate assembly for a file
+deps/imgui/imgui_demo.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_demo.cpp.s
+.PHONY : deps/imgui/imgui_demo.cpp.s
+
+deps/imgui/imgui_draw.o: deps/imgui/imgui_draw.cpp.o
+
+.PHONY : deps/imgui/imgui_draw.o
+
+# target to build an object file
+deps/imgui/imgui_draw.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_draw.cpp.o
+.PHONY : deps/imgui/imgui_draw.cpp.o
+
+deps/imgui/imgui_draw.i: deps/imgui/imgui_draw.cpp.i
+
+.PHONY : deps/imgui/imgui_draw.i
+
+# target to preprocess a source file
+deps/imgui/imgui_draw.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_draw.cpp.i
+.PHONY : deps/imgui/imgui_draw.cpp.i
+
+deps/imgui/imgui_draw.s: deps/imgui/imgui_draw.cpp.s
+
+.PHONY : deps/imgui/imgui_draw.s
+
+# target to generate assembly for a file
+deps/imgui/imgui_draw.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_draw.cpp.s
+.PHONY : deps/imgui/imgui_draw.cpp.s
+
+deps/imgui/imgui_tables.o: deps/imgui/imgui_tables.cpp.o
+
+.PHONY : deps/imgui/imgui_tables.o
+
+# target to build an object file
+deps/imgui/imgui_tables.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_tables.cpp.o
+.PHONY : deps/imgui/imgui_tables.cpp.o
+
+deps/imgui/imgui_tables.i: deps/imgui/imgui_tables.cpp.i
+
+.PHONY : deps/imgui/imgui_tables.i
+
+# target to preprocess a source file
+deps/imgui/imgui_tables.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_tables.cpp.i
+.PHONY : deps/imgui/imgui_tables.cpp.i
+
+deps/imgui/imgui_tables.s: deps/imgui/imgui_tables.cpp.s
+
+.PHONY : deps/imgui/imgui_tables.s
+
+# target to generate assembly for a file
+deps/imgui/imgui_tables.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_tables.cpp.s
+.PHONY : deps/imgui/imgui_tables.cpp.s
+
+deps/imgui/imgui_widgets.o: deps/imgui/imgui_widgets.cpp.o
+
+.PHONY : deps/imgui/imgui_widgets.o
+
+# target to build an object file
+deps/imgui/imgui_widgets.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_widgets.cpp.o
+.PHONY : deps/imgui/imgui_widgets.cpp.o
+
+deps/imgui/imgui_widgets.i: deps/imgui/imgui_widgets.cpp.i
+
+.PHONY : deps/imgui/imgui_widgets.i
+
+# target to preprocess a source file
+deps/imgui/imgui_widgets.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_widgets.cpp.i
+.PHONY : deps/imgui/imgui_widgets.cpp.i
+
+deps/imgui/imgui_widgets.s: deps/imgui/imgui_widgets.cpp.s
+
+.PHONY : deps/imgui/imgui_widgets.s
+
+# target to generate assembly for a file
+deps/imgui/imgui_widgets.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_widgets.cpp.s
+.PHONY : deps/imgui/imgui_widgets.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -178,6 +366,26 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... agbdesk"
+	@echo "... imgui"
+	@echo "... imgui-sfml"
+	@echo "... deps/imgui-sfml/imgui-SFML.o"
+	@echo "... deps/imgui-sfml/imgui-SFML.i"
+	@echo "... deps/imgui-sfml/imgui-SFML.s"
+	@echo "... deps/imgui/imgui.o"
+	@echo "... deps/imgui/imgui.i"
+	@echo "... deps/imgui/imgui.s"
+	@echo "... deps/imgui/imgui_demo.o"
+	@echo "... deps/imgui/imgui_demo.i"
+	@echo "... deps/imgui/imgui_demo.s"
+	@echo "... deps/imgui/imgui_draw.o"
+	@echo "... deps/imgui/imgui_draw.i"
+	@echo "... deps/imgui/imgui_draw.s"
+	@echo "... deps/imgui/imgui_tables.o"
+	@echo "... deps/imgui/imgui_tables.i"
+	@echo "... deps/imgui/imgui_tables.s"
+	@echo "... deps/imgui/imgui_widgets.o"
+	@echo "... deps/imgui/imgui_widgets.i"
+	@echo "... deps/imgui/imgui_widgets.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

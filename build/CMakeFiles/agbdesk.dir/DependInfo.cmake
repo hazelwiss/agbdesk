@@ -10,11 +10,15 @@ set(CMAKE_CXX_COMPILER_ID "GNU")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../deps/imgui"
+  "../deps/imgui-sfml"
   "../"
   )
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles/imgui.dir/DependInfo.cmake"
+  "/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles/imgui-sfml.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.

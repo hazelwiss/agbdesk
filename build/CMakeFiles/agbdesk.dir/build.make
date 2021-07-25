@@ -98,6 +98,8 @@ agbdesk_EXTERNAL_OBJECTS =
 
 ../bin/agbdesk: CMakeFiles/agbdesk.dir/src/main.cpp.o
 ../bin/agbdesk: CMakeFiles/agbdesk.dir/build.make
+../bin/agbdesk: ../bin/lib/libimgui.a
+../bin/agbdesk: ../bin/lib/libimgui-sfml.a
 ../bin/agbdesk: CMakeFiles/agbdesk.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking CXX executable ../bin/agbdesk"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/agbdesk.dir/link.txt --verbose=$(VERBOSE)

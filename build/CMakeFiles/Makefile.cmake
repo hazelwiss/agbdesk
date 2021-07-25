@@ -46,4 +46,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/agbdesk.dir/DependInfo.cmake"
+  "CMakeFiles/imgui-sfml.dir/DependInfo.cmake"
+  "CMakeFiles/imgui.dir/DependInfo.cmake"
   )
