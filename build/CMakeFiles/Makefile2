@@ -93,12 +93,12 @@ clean: CMakeFiles/agbdesk.dir/clean
 CMakeFiles/agbdesk.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=1,2,3 "Built target agbdesk"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles --progress-num=1,2 "Built target agbdesk"
 .PHONY : CMakeFiles/agbdesk.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/agbdesk.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 2
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/agbdesk.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles 0
 .PHONY : CMakeFiles/agbdesk.dir/rule

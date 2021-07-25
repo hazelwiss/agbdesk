@@ -5,7 +5,6 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nibbyt/Projects/emulators/agbdesk/src/main.cpp" "/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles/agbdesk.dir/src/main.cpp.o"
-  "/home/nibbyt/Projects/emulators/agbdesk/src/test/test.cpp" "/home/nibbyt/Projects/emulators/agbdesk/build/CMakeFiles/agbdesk.dir/src/test/test.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -169,33 +169,6 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
-src/test/test.o: src/test/test.cpp.o
-
-.PHONY : src/test/test.o
-
-# target to build an object file
-src/test/test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/test/test.cpp.o
-.PHONY : src/test/test.cpp.o
-
-src/test/test.i: src/test/test.cpp.i
-
-.PHONY : src/test/test.i
-
-# target to preprocess a source file
-src/test/test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/test/test.cpp.i
-.PHONY : src/test/test.cpp.i
-
-src/test/test.s: src/test/test.cpp.s
-
-.PHONY : src/test/test.s
-
-# target to generate assembly for a file
-src/test/test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/test/test.cpp.s
-.PHONY : src/test/test.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -208,9 +181,6 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
-	@echo "... src/test/test.o"
-	@echo "... src/test/test.i"
-	@echo "... src/test/test.s"
 .PHONY : help
 
 

@@ -3,5 +3,3 @@
 
 CMakeFiles/agbdesk.dir/src/main.cpp.o: ../src/main.cpp
 
-CMakeFiles/agbdesk.dir/src/test/test.cpp.o: ../src/test/test.cpp
-

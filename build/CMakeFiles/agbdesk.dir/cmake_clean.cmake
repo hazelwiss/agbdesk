@@ -2,7 +2,6 @@ file(REMOVE_RECURSE
   "../bin/agbdesk"
   "../bin/agbdesk.pdb"
   "CMakeFiles/agbdesk.dir/src/main.cpp.o"
-  "CMakeFiles/agbdesk.dir/src/test/test.cpp.o"
 )
 
 # Per-language clean rules from dependency scanning.
