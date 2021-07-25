@@ -5,9 +5,9 @@ project(agbdesk)
 set(CMAKE_BINARY_DIR ${CMAKE_SOURCE_DIR}/bin)
 set(EXECUTABLE_OUTPUT_PATH ${CMAKE_BINARY_DIR})
 set(LIBRARY_OUTPUT_PATH ${CMAKE_BINARY_DIR}/lib)
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/imgui)
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/deps/imgui)
 
-add_library(imgui OBJECT ${IMGUI_DIR}/backends/)
+add_library(imgui OBJECT ${IMGUI_DIR})
 
 include_directories("${PROJECT_SOURCE_DIR}")
 
