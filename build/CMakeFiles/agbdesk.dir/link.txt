@@ -1,0 +1,1 @@
+/usr/bin/c++  -g -O0 -Wall CMakeFiles/agbdesk.dir/src/main.cpp.o CMakeFiles/agbdesk.dir/src/test/test.cpp.o -o ../bin/agbdesk 

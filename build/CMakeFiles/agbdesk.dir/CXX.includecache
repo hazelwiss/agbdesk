@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/nibbyt/Projects/emulators/agbdesk/src/main.cpp
+
+/home/nibbyt/Projects/emulators/agbdesk/src/test/test.cpp
+
