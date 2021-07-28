@@ -1,0 +1,5 @@
+/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/edit_cache.dir
+/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/agbdesk.dir
+/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/rebuild_cache.dir
+/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/imgui-sfml.dir
+/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/imgui.dir

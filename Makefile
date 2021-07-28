@@ -330,6 +330,60 @@ deps/imgui/imgui_widgets.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/imgui.dir/build.make CMakeFiles/imgui.dir/deps/imgui/imgui_widgets.cpp.s
 .PHONY : deps/imgui/imgui_widgets.cpp.s
 
+src/agbdesk.o: src/agbdesk.cpp.o
+
+.PHONY : src/agbdesk.o
+
+# target to build an object file
+src/agbdesk.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/agbdesk.cpp.o
+.PHONY : src/agbdesk.cpp.o
+
+src/agbdesk.i: src/agbdesk.cpp.i
+
+.PHONY : src/agbdesk.i
+
+# target to preprocess a source file
+src/agbdesk.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/agbdesk.cpp.i
+.PHONY : src/agbdesk.cpp.i
+
+src/agbdesk.s: src/agbdesk.cpp.s
+
+.PHONY : src/agbdesk.s
+
+# target to generate assembly for a file
+src/agbdesk.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/agbdesk.cpp.s
+.PHONY : src/agbdesk.cpp.s
+
+src/cpu/registerfile.o: src/cpu/registerfile.cpp.o
+
+.PHONY : src/cpu/registerfile.o
+
+# target to build an object file
+src/cpu/registerfile.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/registerfile.cpp.o
+.PHONY : src/cpu/registerfile.cpp.o
+
+src/cpu/registerfile.i: src/cpu/registerfile.cpp.i
+
+.PHONY : src/cpu/registerfile.i
+
+# target to preprocess a source file
+src/cpu/registerfile.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/registerfile.cpp.i
+.PHONY : src/cpu/registerfile.cpp.i
+
+src/cpu/registerfile.s: src/cpu/registerfile.cpp.s
+
+.PHONY : src/cpu/registerfile.s
+
+# target to generate assembly for a file
+src/cpu/registerfile.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/registerfile.cpp.s
+.PHONY : src/cpu/registerfile.cpp.s
+
 src/main.o: src/main.cpp.o
 
 .PHONY : src/main.o
@@ -356,6 +410,33 @@ src/main.s: src/main.cpp.s
 src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
+
+src/terminal/agbterm.o: src/terminal/agbterm.cpp.o
+
+.PHONY : src/terminal/agbterm.o
+
+# target to build an object file
+src/terminal/agbterm.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.o
+.PHONY : src/terminal/agbterm.cpp.o
+
+src/terminal/agbterm.i: src/terminal/agbterm.cpp.i
+
+.PHONY : src/terminal/agbterm.i
+
+# target to preprocess a source file
+src/terminal/agbterm.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.i
+.PHONY : src/terminal/agbterm.cpp.i
+
+src/terminal/agbterm.s: src/terminal/agbterm.cpp.s
+
+.PHONY : src/terminal/agbterm.s
+
+# target to generate assembly for a file
+src/terminal/agbterm.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.s
+.PHONY : src/terminal/agbterm.cpp.s
 
 # Help Target
 help:
@@ -386,9 +467,18 @@ help:
 	@echo "... deps/imgui/imgui_widgets.o"
 	@echo "... deps/imgui/imgui_widgets.i"
 	@echo "... deps/imgui/imgui_widgets.s"
+	@echo "... src/agbdesk.o"
+	@echo "... src/agbdesk.i"
+	@echo "... src/agbdesk.s"
+	@echo "... src/cpu/registerfile.o"
+	@echo "... src/cpu/registerfile.i"
+	@echo "... src/cpu/registerfile.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... src/terminal/agbterm.o"
+	@echo "... src/terminal/agbterm.i"
+	@echo "... src/terminal/agbterm.s"
 .PHONY : help
 
 
