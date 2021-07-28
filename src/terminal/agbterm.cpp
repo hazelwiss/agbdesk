@@ -5,9 +5,53 @@
 #include<utility>
 #include<array>
 #include<stdexcept>
+#include<memory>
 #define CMD_ENTRY [](const CommandArgs& args)
 
 constexpr char DEFAULT_ARG[] = ":";
+
+struct CommandDecoder{
+    CommandDecoder(std::string cmd){
+        std::string argstr = cmd.substr(cmd.find(' '));
+        argstr = std::string(std::find_if(argstr.begin(), argstr.end(), [](char c)->bool{ return c != ' '; }), argstr.end());
+        while(argstr.size()){
+            bool isstring{false};
+            char stringc;
+            size_t strpos = 0;
+            std::string cutstr = std::string(argstr.begin(), std::find_if(argstr.begin(), argstr.end(), [&](char c){
+                bool ret = isstring ? c == stringc : c == ' ';
+                ++strpos;
+                if(c == '\'' || c == '\"'){
+                    isstring = true;
+                    stringc = c;
+                }
+                return ret;
+            }));
+            std::erase_if(cutstr, [&](char c)->bool{ return c == '\"' || c == '\'' || (!isstring && c == ' '); });
+            std::string arg;
+            std::string value;
+            if(cutstr.find(':') != std::string::npos){
+                arg = cutstr.substr(0,cutstr.find(':'));
+                value = cutstr.substr(cutstr.find(':')+1);
+            } else{
+                arg = DEFAULT_ARG;
+                value = cutstr;
+            }
+            decoded[arg] = value;
+            if(cutstr.size() >= argstr.size())
+                argstr = "";
+            else{
+                argstr = argstr.substr(strpos);
+                argstr = std::string(std::find_if(argstr.begin(), argstr.end(), [](char c)->bool{ return c != ' '; }), argstr.end());
+            }
+
+        }
+    }
+    std::unordered_map<std::string, std::string>&& moveMap(){ return std::move(decoded); }
+protected:
+    std::unordered_map<std::string, std::string> decoded;
+};
+
 using CommandArgs = std::unordered_map<std::string, std::string>;
 enum class COMMAND{
     FLUSH=0,
@@ -28,7 +72,7 @@ std::unordered_map<COMMAND, std::string> cmddesc{
     {COMMAND::PRINT, "prints the argument out to the console."},
     {COMMAND::HELP,  "shows this menu."}
 };
-void printNL(const std::string& str){ out += str+"\n"; }
+void printNL(const std::string& str){ (out += str)+="\n"; }
 
 std::array<std::function<void(const CommandArgs&)>, (size_t)COMMAND::NUMCMDS+1> cmdarray = {
     CMD_ENTRY{  //  FLUSH
@@ -36,7 +80,11 @@ std::array<std::function<void(const CommandArgs&)>, (size_t)COMMAND::NUMCMDS+1> 
         out = std::string();
     },
     CMD_ENTRY{  //  PRINT
-        printNL(args.at(DEFAULT_ARG));
+        if(args.contains(DEFAULT_ARG))
+            printNL(args.at(DEFAULT_ARG));
+        else{
+            printNL("no string to print was specified!");
+        }
     },
     CMD_ENTRY{  //  HELP
         printNL("these are the available commands:");
@@ -55,6 +103,8 @@ struct DecodedCommand{
 DecodedCommand decodeCommand(const std::string& cmd){
     if(std::string cmdstr = cmd.substr(0, cmd.find(' ')); cmdstrings.contains(cmdstr)){
         DecodedCommand ret{.cmd = cmdstrings[cmdstr]};
+        CommandDecoder decode(cmd);
+        ret.args = decode.moveMap();
         return ret;
     } else
         printNL("invalid command.");
@@ -66,3 +116,6 @@ void AGBTerm::run(const std::string& cmd){
     cmdlog.emplace_back(cmd.data());
     cmdarray[(size_t)dcmd.cmd](dcmd.args);
 } 
+
+const std::string& AGBTerm::cout(){ return out; }
+void AGBTerm::cin(const std::string& in){ printNL(in); }

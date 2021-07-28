@@ -438,6 +438,33 @@ src/terminal/agbterm.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.s
 .PHONY : src/terminal/agbterm.cpp.s
 
+src/visual/visual.o: src/visual/visual.cpp.o
+
+.PHONY : src/visual/visual.o
+
+# target to build an object file
+src/visual/visual.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/visual/visual.cpp.o
+.PHONY : src/visual/visual.cpp.o
+
+src/visual/visual.i: src/visual/visual.cpp.i
+
+.PHONY : src/visual/visual.i
+
+# target to preprocess a source file
+src/visual/visual.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/visual/visual.cpp.i
+.PHONY : src/visual/visual.cpp.i
+
+src/visual/visual.s: src/visual/visual.cpp.s
+
+.PHONY : src/visual/visual.s
+
+# target to generate assembly for a file
+src/visual/visual.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/visual/visual.cpp.s
+.PHONY : src/visual/visual.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -479,6 +506,9 @@ help:
 	@echo "... src/terminal/agbterm.o"
 	@echo "... src/terminal/agbterm.i"
 	@echo "... src/terminal/agbterm.s"
+	@echo "... src/visual/visual.o"
+	@echo "... src/visual/visual.i"
+	@echo "... src/visual/visual.s"
 .PHONY : help
 
 

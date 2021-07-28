@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/agbdesk.dir/src/cpu/registerfile.cpp.o"
   "CMakeFiles/agbdesk.dir/src/main.cpp.o"
   "CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.o"
+  "CMakeFiles/agbdesk.dir/src/visual/visual.cpp.o"
   "bin/agbdesk"
   "bin/agbdesk.pdb"
 )

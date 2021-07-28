@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/nibbyt/Projects/emulators/agbdesk/src/cpu/registerfile.cpp" "/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/agbdesk.dir/src/cpu/registerfile.cpp.o"
   "/home/nibbyt/Projects/emulators/agbdesk/src/main.cpp" "/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/agbdesk.dir/src/main.cpp.o"
   "/home/nibbyt/Projects/emulators/agbdesk/src/terminal/agbterm.cpp" "/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/agbdesk.dir/src/terminal/agbterm.cpp.o"
+  "/home/nibbyt/Projects/emulators/agbdesk/src/visual/visual.cpp" "/home/nibbyt/Projects/emulators/agbdesk/CMakeFiles/agbdesk.dir/src/visual/visual.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
