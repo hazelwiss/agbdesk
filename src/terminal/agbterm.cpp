@@ -6,13 +6,20 @@
 #include<array>
 #include<stdexcept>
 #include<memory>
+#include<atomic>
+#include<mutex>
+
 #define CMD_ENTRY [](const CommandArgs& args)
 
 constexpr char DEFAULT_ARG[] = ":";
 
 struct CommandDecoder{
-    CommandDecoder(std::string cmd){
-        std::string argstr = cmd.substr(cmd.find(' '));
+    CommandDecoder(const std::string& cmd){
+        std::string argstr;
+        if(size_t pos = cmd.find(' '); pos != std::string::npos)
+            argstr = cmd.substr(pos);
+        else
+            return;
         argstr = std::string(std::find_if(argstr.begin(), argstr.end(), [](char c)->bool{ return c != ' '; }), argstr.end());
         while(argstr.size()){
             bool isstring{false};
@@ -111,11 +118,21 @@ DecodedCommand decodeCommand(const std::string& cmd){
     return DecodedCommand{.cmd=COMMAND::NUMCMDS};
 }
 
+struct Access{
+    Access(){ RequestAccess(); }
+    ~Access(){ ReleaseAccess(); }
+    void RequestAccess(){ while(is_occuipied); is_occuipied = true; mut.lock(); }
+    void ReleaseAccess(){ mut.unlock(); is_occuipied = false; }
+protected:
+static inline std::mutex mut;
+static inline std::atomic_bool is_occuipied{false};
+};
+
 void AGBTerm::run(const std::string& cmd){
+    Access hold;
     auto dcmd = decodeCommand(cmd);
     cmdlog.emplace_back(cmd.data());
     cmdarray[(size_t)dcmd.cmd](dcmd.args);
 } 
-
-const std::string& AGBTerm::cout(){ return out; }
-void AGBTerm::cin(const std::string& in){ printNL(in); }
+std::string AGBTerm::cout(){ Access hold; return out; }
+void AGBTerm::cin(const std::string& in){ Access hold; printNL(in); }

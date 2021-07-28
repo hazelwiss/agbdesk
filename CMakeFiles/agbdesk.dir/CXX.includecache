@@ -23,6 +23,10 @@ stdexcept
 -
 memory
 -
+atomic
+-
+mutex
+-
 
 /home/nibbyt/Projects/emulators/agbdesk/src/terminal/agbterm.h
 string

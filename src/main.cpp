@@ -9,9 +9,12 @@
 #include<visual/visual.h>
 #include"common.h"
 #include"agbdesk.h"
+#include<thread>
 
 int main(){
     Visual::init();
-    while(true);
+    while(true){
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
     return 1;
 }

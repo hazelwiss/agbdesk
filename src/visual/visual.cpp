@@ -10,7 +10,7 @@
 #include<terminal/agbterm.h>
 
 struct ThreadContext{
-    sf::RenderWindow win{sf::VideoMode(640, 480), "ImGui+SFML"};
+    sf::RenderWindow win{sf::VideoMode(1920, 1080), "ImGui+SFML"};
 };
 
 std::thread thread;
@@ -23,7 +23,7 @@ void renderTerminal(ThreadContext& context){
             ImGui::TextWrapped(AGBTerm::cout().c_str());
             ImGui::EndChild();
         }
-        std::array<char, 255> buf;
+        std::array<char, 255> buf{0};
         if(ImGui::InputText("input", buf.begin(), buf.size(), 
             ImGuiInputTextFlags_EnterReturnsTrue))
         {
