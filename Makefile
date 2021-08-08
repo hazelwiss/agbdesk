@@ -357,6 +357,33 @@ src/agbdesk.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/agbdesk.cpp.s
 .PHONY : src/agbdesk.cpp.s
 
+src/cpu/instructions.o: src/cpu/instructions.cpp.o
+
+.PHONY : src/cpu/instructions.o
+
+# target to build an object file
+src/cpu/instructions.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/instructions.cpp.o
+.PHONY : src/cpu/instructions.cpp.o
+
+src/cpu/instructions.i: src/cpu/instructions.cpp.i
+
+.PHONY : src/cpu/instructions.i
+
+# target to preprocess a source file
+src/cpu/instructions.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/instructions.cpp.i
+.PHONY : src/cpu/instructions.cpp.i
+
+src/cpu/instructions.s: src/cpu/instructions.cpp.s
+
+.PHONY : src/cpu/instructions.s
+
+# target to generate assembly for a file
+src/cpu/instructions.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/agbdesk.dir/build.make CMakeFiles/agbdesk.dir/src/cpu/instructions.cpp.s
+.PHONY : src/cpu/instructions.cpp.s
+
 src/cpu/registerfile.o: src/cpu/registerfile.cpp.o
 
 .PHONY : src/cpu/registerfile.o
@@ -497,6 +524,9 @@ help:
 	@echo "... src/agbdesk.o"
 	@echo "... src/agbdesk.i"
 	@echo "... src/agbdesk.s"
+	@echo "... src/cpu/instructions.o"
+	@echo "... src/cpu/instructions.i"
+	@echo "... src/cpu/instructions.s"
 	@echo "... src/cpu/registerfile.o"
 	@echo "... src/cpu/registerfile.i"
 	@echo "... src/cpu/registerfile.s"

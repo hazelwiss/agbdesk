@@ -1,6 +1,6 @@
 #pragma once
 #include<vector>
-#include"cpu/registerfile.h"
+#include"core/cpu/registerfile.h"
 #include"common.h"
 
 struct AGBDesk{
