@@ -6,7 +6,7 @@ using namespace x64;
     ADD
 */
 void BaseEmitter::eADD(GPR a, GPR b) const{
-
+    if(a == b)
 }
 
 void BaseEmitter::eADD(GPR a, Mem b) const{

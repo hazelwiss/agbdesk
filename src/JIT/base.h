@@ -7,6 +7,8 @@ struct Operand{
     bool isReg() const noexcept{ return is_reg; }
     bool isMem() const noexcept{ return is_mem; }
     bool isImm() const noexcept{ return is_imm; }
+    uint8_t size() const{}
+    bool operator==(const Operand& other){ return size() == other.size(); }
 /*
     Data members.
 */
@@ -16,6 +18,7 @@ protected:
     bool is_reg{false};
     bool is_mem{false};
     bool is_imm{false};
+    uint8_t size{0};
 };
 
 struct BaseReg: Operand{
@@ -27,9 +30,10 @@ struct BaseReg: Operand{
         GPR32,
         GPR64,
     };
-    BaseReg(Group type) noexcept: type{type}, Operand() { is_reg = true; };
+    BaseReg(Group group);
+    Group getGroup() { return group; }
 protected:
-    Group type{None};
+    Group group{None};
 };
 
 struct BaseMem: Operand{
@@ -40,9 +44,10 @@ struct BaseMem: Operand{
         S32,
         S64
     };
-    BaseMem(Group type) noexcept: type{type}, Operand() { is_mem = true; }
+    BaseMem(Group type);
+    Group getGroup() { return group; }
 protected:
-    Group type{None};
+    Group group{None};
 };
 
 struct BaseImm: Operand{
@@ -53,8 +58,9 @@ struct BaseImm: Operand{
         S32,
         S64
     };
-    BaseImm(Group type) noexcept: type{type}, Operand() { is_imm = true; }
+    BaseImm(Group group);
+    Group getGroup() { return group; }
 protected:
-    Group type{None};
+    Group group{None};
 };
 
