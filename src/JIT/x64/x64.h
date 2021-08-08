@@ -2,8 +2,6 @@
 #include<common.h>
 #include<JIT/base.h>
 
-struct EmitDestination{};
-
 namespace x64{
     //  Register Argument
     struct GPR: BaseReg{
@@ -19,9 +17,10 @@ namespace x64{
     };
 
     struct BaseEmitter{
-        bool isLocked() const;
-        void lock();
-        void unlock();
+        void setEmitDest(uint8_t* data, size_t capacity) { destination = EmitDestination(data, capacity); };
+        constexpr bool isLocked() const { return mutlock; }
+        void lock()     { mutlock = true; }
+        void unlock()   { mutlock = false; }
         /*
             Emitter functions.
         */
@@ -29,26 +28,26 @@ namespace x64{
             ALU opererations
         */
         //  ADD
-        void eADD(GPR, GPR) const;
-        void eADD(GPR, Mem) const;
-        void eADD(GPR, Imm) const;
-        void eADD(Mem, GPR) const;
-        void eADD(Mem, Imm) const;
+        void eADD(GPR, GPR);
+        void eADD(GPR, Mem);
+        void eADD(GPR, Imm);
+        void eADD(Mem, GPR);
+        void eADD(Mem, Imm);
         /*
             Output operations.
         */
         //  MOV
-        void eMOV(GPR, GPR) const;
-        void eMOV(GPR, Mem) const;
-        void eMOV(GPR, Imm) const;
-        void eMOV(Mem, GPR) const;
-        void eMOV(Mem, Imm) const;
+        void eMOV(GPR, GPR);
+        void eMOV(GPR, Mem);
+        void eMOV(GPR, Imm);
+        void eMOV(Mem, GPR);
+        void eMOV(Mem, Imm);
     protected:
         bool mutlock;
         EmitDestination destination;
     };
     
     struct Assembler: BaseEmitter{
-
+        Assembler(uint8_t* data, size_t capacity) noexcept: BaseEmitter() { setEmitDest(data, capacity); }
     };
 };

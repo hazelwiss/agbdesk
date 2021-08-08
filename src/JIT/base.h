@@ -7,8 +7,8 @@ struct Operand{
     bool isReg() const noexcept{ return is_reg; }
     bool isMem() const noexcept{ return is_mem; }
     bool isImm() const noexcept{ return is_imm; }
-    uint8_t size() const{}
-    bool operator==(const Operand& other){ return size() == other.size(); }
+    uint8_t getSize() const{ return size; }
+    bool operator==(const Operand& other){ return size == other.size; }
 /*
     Data members.
 */
@@ -30,10 +30,10 @@ struct BaseReg: Operand{
         GPR32,
         GPR64,
     };
-    BaseReg(Group group);
-    Group getGroup() { return group; }
+    BaseReg(Group group) noexcept;
+    constexpr Group getGroup() const { return group; }
 protected:
-    Group group{None};
+    Group group;
 };
 
 struct BaseMem: Operand{
@@ -44,10 +44,10 @@ struct BaseMem: Operand{
         S32,
         S64
     };
-    BaseMem(Group type);
-    Group getGroup() { return group; }
+    BaseMem(Group type) noexcept;
+    constexpr Group getGroup() const { return group; }
 protected:
-    Group group{None};
+    Group group;
 };
 
 struct BaseImm: Operand{
@@ -58,9 +58,18 @@ struct BaseImm: Operand{
         S32,
         S64
     };
-    BaseImm(Group group);
-    Group getGroup() { return group; }
+    BaseImm(Group group) noexcept;
+    constexpr Group getGroup() const { return group; }
 protected:
-    Group group{None};
+    Group group;
 };
 
+struct EmitDestination{
+    EmitDestination() = default;
+    EmitDestination(uint8_t* data, size_t capacity): data{data}, capacity{capacity} {}
+    void pushByte(uint8_t byte){ *data++ = byte; }
+protected:
+    uint8_t* data;
+    size_t capacity;
+    size_t size{0};
+};

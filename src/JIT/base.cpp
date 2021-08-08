@@ -1,6 +1,6 @@
 #include"base.h"
 
-BaseReg::BaseReg(Group group) noexcept: group{group}, Operand(){
+BaseReg::BaseReg(Group group) noexcept: Operand(), group{group}{
     is_reg = true;
     switch(group)
     {
@@ -17,13 +17,15 @@ BaseReg::BaseReg(Group group) noexcept: group{group}, Operand(){
     case Group::GPR64:
         size = 8;
         break;
+    case Group::None:
+        size = 0;
     }
 }
 
-BaseMem::BaseMem(Group type) noexcept: group{group}, Operand(){ 
+BaseMem::BaseMem(Group type) noexcept: Operand(), group{group}{ 
     is_mem = true;
 }
 
-BaseImm::BaseImm(Group group) noexcept: group{group}, Operand(){ 
+BaseImm::BaseImm(Group group) noexcept: Operand(), group{group}{ 
     is_imm = true; 
 }
