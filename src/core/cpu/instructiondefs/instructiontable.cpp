@@ -41,7 +41,7 @@ const ARMInstrTable::ARMTable ARMInstrTable::ARMLUT = []()consteval->ARMInstrTab
     auto lambda = [&](const uint16_t opc){ 
         if((opc&dp_ib.mask) == dp_ib.opcode){
             table[opc].type = InstructionTypes::DATA_PROCESSING;
-            table[opc].func = ARMInstrDef::iDP<>;
+            //table[opc].func = ARMInstrDef::iDP<>;
         } else if((opc&m_ib.mask) == m_ib.opcode){
             table[opc].type = InstructionTypes::MULTIPLY;
             table[opc].func = 0;

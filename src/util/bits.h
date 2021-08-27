@@ -3,6 +3,10 @@
 #include<type_traits>
 #include<common.h>
 
+
+constexpr size_t DetermineMinBits(size_t val)
+    { if(!val) return 0; size_t r = 0; while(++r, val>>=1); return r; }
+
 template<size_t bits = 0>
 struct BitsMax{
     static_assert(bits <= 128, "cannot determine maximum size of integer with more than 128 bits.");
