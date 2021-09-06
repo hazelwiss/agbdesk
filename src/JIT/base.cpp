@@ -33,18 +33,6 @@ constexpr std::array<size_t, 5> imm_size_lut = []()consteval{
     return ret;
 }();
 
-void Operand::parse(EmitDestination& destination) const{
-
-    switch(getSize()){
-    case 1: destination.pushByte(data[0]); break; 
-    case 2:{ uint16_t v; std::memcpy(&v, data, sizeof(v)); destination.pushDByte(v); break; }
-    case 4:{ uint32_t v; std::memcpy(&v, data, sizeof(v)); destination.pushQByte(v); break; }
-    case 8:{ uint64_t v; std::memcpy(&v, data, sizeof(v)); destination.pushDQByte(v); break; }
-    default:
-        std::runtime_error("trying to parse an operand value of more than 8 bytes");
-    }
-}
-
 BaseReg::BaseReg(Group group) noexcept: Operand(), group{group}{
     is_reg = true;
     size = reg_size_lut[group];

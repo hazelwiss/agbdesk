@@ -5,97 +5,90 @@
 #include<util/int.h>
 #include<optional>
 #include<cstring>
+#include<optional>
+#include<stdexcept>
+#include<util/bits.h>
+#include"errstring.h"
+
 #define CREATE_BASIC_OVERLOADS(func)        \
-    void func (const GPR&, const GPR&);     \
-    void func (const GPR&, const Mem&);     \
-    void func (const GPR&, const Imm&);     \
-    void func (const Mem&, const GPR&);     \
-    void func (const Mem&, const Imm&);     \
-
-
+    void func (RefReg, RefReg);                   \
+    void func (RefReg, RefMem);            \
+    void func (RefReg, RefImm);            \
+    void func (RefMem, RefReg);            \
+    void func (RefMem, RefImm);     \
 
 namespace x64{
-    namespace ErrStrings{
-        constexpr char INVOPERANDS[] = "invalid operand combination."; 
-        constexpr char INVOPERANSIZES[] = "invalid operand size combination";
-    };
     struct GPR;
     struct Mem;
     struct Imm;
+    using RefReg = const GPR&;
+    using RefMem = const Mem&;
+    using RefImm = const Imm&;
 
     struct SIB{
         SIB() = default;
-        SIB(Int<3> base, Int<3> index, Int<2> scale): 
-            scale{scale}, index{index}, base{base} {}
+        SIB(RefReg base, RefReg index, Int<2> scale): 
+            scale{scale}, index{&index}, base{&base} {}
+        void setScale(Int<2> scale) noexcept    { this->scale = scale; }
+        void setIndex(const GPR& reg) noexcept  { this->index = &reg; }
+        void setBase(const GPR& reg) noexcept   { this->base = &reg; }
+        size_t getScale() const noexcept        { return scale; }
+        const GPR& getIndex() const { if(!index) throw std::runtime_error(ErrStrings::INVSIB); return *index; }
+        const GPR& getBase() const  { if(!base) throw std::runtime_error(ErrStrings::INVSIB); return *base; }
+    protected:
         Int<2> scale;
-        Int<3> index;
-        Int<3> base;
+        const GPR* index{nullptr};
+        const GPR* base{nullptr};
     };
 
     //  Used for effective addressing
+    enum class DispSize{ i8, i32 };
+    struct Disp{
+        Disp() = default;
+        Disp(int64_t d) noexcept: size{(d < 256 && d > -128) ? DispSize::i8 : DispSize::i32}, disp{d} {}
+        int64_t getDisp() const noexcept { return size == DispSize::i8 ? (int8_t)disp : (int32_t)disp; }
+        DispSize size;
+    protected:
+        int64_t disp;
+    };
+
     struct Address{
         Address() = delete;
-        Address(const GPR& reg){}
-        Address(size_t val){
-            dispatch = val;
-        }
-        Address&& operator+(const GPR& reg);
-        Address&& operator+(size_t val);
+        Address(RefReg RefReg) noexcept;
+        Address(RefReg RefReg, size_t scale) noexcept;
+        Address(size_t val) noexcept;
+        Address&& operator+(RefReg RefReg);
+        Address&& operator+(Disp val);
         Address&& operator*(size_t val);
+        const SIB& getSIB() const noexcept { return sib; }
+        const size_t getDispatch() const noexcept { return dispatch.getDisp(); }
+        friend Address&& operator+(RefReg RefReg, Address&& adr);
+        friend Address&& operator+(size_t val, Address&& adr);
+        bool hasDisp32() const noexcept { return hasDisp() && (dispatch.size == DispSize::i32); }
+        bool hasDisp8() const noexcept  { return hasDisp() && (dispatch.size == DispSize::i8); }
+        bool hasDisp() const noexcept   { return has_disp; }
+        bool hasScale() const noexcept  { return has_sib_scale; }
+        bool hasBase() const noexcept   { return has_sib_base; }
+        bool hasIndex() const noexcept  { return has_sib_index; }
+        bool hasSIB() const noexcept { return hasScale() && hasBase() && hasIndex(); }
     protected:
         SIB sib;
-        size_t dispatch;
+        Disp dispatch;
+        bool has_disp{false}, has_sib_scale{false}, has_sib_base{false}, has_sib_index{false};
     };
 
-    //  Register Argument
-    struct GPR: BaseReg{
-        enum class SizePrefixes{
-            F16 = 0x66,
-            F64 = 0x48
+    namespace Ptr{
+        struct Pointer{
+            Pointer(BaseMem::Group group): group{group} {}; 
+            Mem operator[](Address&&) const noexcept;
+        protected:
+            BaseMem::Group group;
         };
-        GPR(BaseReg::Group group, Int<4> regindex) noexcept: 
-            BaseReg(group), 
-            regindex{.index = (size_t)regindex, .extension = regindex.getBit(3)} 
-        {
-            switch(group){
-            case Group::GPR16: size_prefix = (size_t)SizePrefixes::F16; break;
-            case Group::GPR64: size_prefix = (size_t)SizePrefixes::F64; break;
-            default:;
-            }
-        }
-        Address operator+(size_t val) const noexcept;
-        Address operator+(GPR reg) const noexcept;
-        Address operator*(size_t val) const noexcept;
-        friend Address operator+(size_t val, const GPR& reg){ }
-        size_t getValue() const noexcept { size_t val; std::memcpy(&val, data, getSize()); return val; }
-        const std::optional<uint8_t>& getSizePrefix() const noexcept { return size_prefix; }
-        struct{
-            Int<3> index;
-            bool extension;
-        } const regindex;
-    protected:
-        std::optional<uint8_t> size_prefix;
-    };
-    //  Memory Argument 
-    struct Mem: BaseMem{
-        Mem(
-            BaseMem::Group group, 
-            Int<3> sib_base = 0,
-            Int<3> sib_index = 0,
-            Int<2> sib_scale = 0
-        ) noexcept: BaseMem(group),
-            sib_base{sib_base}, sib_index{sib_index}, sib_scale{sib_scale} {} 
-    protected:
-        size_t sib_base, sib_index, sib_scale;
-    };
-    //  Constant Argument
-    struct Imm: BaseImm{
-        Imm(BaseImm::Group group) noexcept: BaseImm(group) {}
-    };
-
-    enum class Prefix: uint8_t{ 
-        LOCK = 0xF0,    //  lock prefix
-    };
+        extern const Pointer qword;
+        extern const Pointer dword;
+        extern const Pointer word;
+        extern const Pointer byte;    //  unused?
+    }
 
     namespace Regs{
         extern const GPR RAX;
@@ -113,20 +106,57 @@ namespace x64{
         extern const GPR RDX;
         extern const GPR EDX;
         extern const GPR DX;
+
+        extern const GPR RDI;
+        extern const GPR EDI;
+        extern const GPR DI;
     };
 
-    namespace Ptr{
-        struct Pointer{
-            Pointer(BaseMem::Group group): group{group} {}; 
-            Mem operator[](Address&&) const noexcept;
-        protected:
-            BaseMem::Group group;
+    //  RefRegister Argument
+    struct GPR: BaseReg{
+        enum class SizePrefixes{
+            F16 = 0x66,
+            F64 = 0x48
         };
-        extern const Pointer qword;
-        extern const Pointer dword;
-        extern const Pointer word;
-        extern const Pointer byte;    //  unused?
-    }
+        GPR(BaseReg::Group group, Int<4> RefRegindex) noexcept: 
+            BaseReg(group), 
+            regindex{.index = (size_t)RefRegindex, .extension = RefRegindex.getBit(3)} 
+        {
+            switch(group){
+            case Group::GPR16: size_prefix = (size_t)SizePrefixes::F16; break;
+            case Group::GPR64: size_prefix = (size_t)SizePrefixes::F64; break;
+            default:;
+            }
+        }
+        Address operator+(size_t val) const noexcept;
+        Address operator+(RefReg RefReg) const noexcept;
+        Address operator*(size_t val) const noexcept;
+        friend Address operator+(size_t val, RefReg RefReg) noexcept;
+        size_t getValue() const noexcept { size_t val; std::memcpy(&val, data, getSize()); return val; }
+        const std::optional<uint8_t>& getSizePrefix() const noexcept { return size_prefix; }
+        struct{
+            Int<3> index;
+            bool extension;
+        } const regindex;
+    protected:
+        std::optional<uint8_t> size_prefix;
+    };
+    //  Memory Argument 
+    struct Mem: BaseMem{
+        Mem(
+            BaseMem::Group group, 
+            const Address& adr
+        ) noexcept: BaseMem(group), adr{adr} {} 
+        Address adr;
+    };
+    //  Constant Argument
+    struct Imm: BaseImm{
+        Imm(BaseImm::Group group) noexcept: BaseImm(group) {}
+    };
+
+    enum class Prefix: uint8_t{ 
+        LOCK = 0xF0,    //  lock prefix
+    };
 
     struct BaseEmitter{
         void setEmitDest(uint8_t* data, size_t capacity) { destination = EmitDestination(data, capacity); };

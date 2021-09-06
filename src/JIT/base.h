@@ -22,7 +22,6 @@ struct Operand{
     bool isImm() const noexcept{ return is_imm; }
     uint8_t getSize() const{ return size; }
     bool operator==(const Operand& other) const{ return size == other.size; }
-    void parse(EmitDestination& destination) const;
 /*
     Data members.
 */
