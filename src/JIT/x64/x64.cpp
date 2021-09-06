@@ -48,7 +48,7 @@ enum class MOD: size_t{
     DISP32 = 0b10
 };
 
-void emitModRM(EmitDestination& dest, RefReg rm, RefReg reg, MOD mod)
+void emitMODRM(EmitDestination& dest, RefReg rm, RefReg reg, MOD mod)
     { dest.pushByte((uint8_t)(rm.regindex.index|(reg.regindex.index<<3)|((size_t)mod<<6))); } 
 
 void emitSIB(EmitDestination& dest, const SIB& sib){ 
@@ -57,17 +57,18 @@ void emitSIB(EmitDestination& dest, const SIB& sib){
         (sib.getBase().regindex.index << 6)); 
 }
 
-void emitModSIBDisp(EmitDestination& dest, RefMem mem, RefReg reg) {
-    if(!mem.adr.hasSIB() && !mem.adr.hasDisp()){
-        emitModRM(dest, mem.adr.getSIB().getBase(), reg, MOD::INDIRECT_ADDRESSING);
-    } else if(mem.adr.hasDisp()){
+void emitMODSIBDisp(EmitDestination& dest, RefMem mem, RefReg reg) {
+    if(!mem.adr.hasDisp() && !mem.adr.hasSIB()){
+        emitMODRM(dest, mem.adr.getSIB().getBase(), reg, MOD::INDIRECT_ADDRESSING);
+    } else if(mem.adr.hasDisp() && !mem.adr.hasSIB()){
         if(mem.adr.hasDisp32()){
-            emitModRM(dest, mem.adr.getSIB().getBase(), reg, MOD::DISP32);
+            emitMODRM(dest, mem.adr.getSIB().getBase(), reg, MOD::DISP32);
             dest.pushQByte(mem.adr.getDispatch());
         } else{
-            emitModRM(dest, mem.adr.getSIB().getBase(), reg, MOD::DISP8);
+            emitMODRM(dest, mem.adr.getSIB().getBase(), reg, MOD::DISP8);
             dest.pushByte(mem.adr.getDispatch());
         }
+    } else{
 
     }
     //emitSIB(dest, mem.adr.getSIB());
@@ -90,13 +91,13 @@ void BaseEmitter::emitPrefixes() noexcept {
 void BaseEmitter::eADD(RefReg a, RefReg b){
     assertOperandSize(a, b);
     emitOpcode<1>(destination, a.getSizePrefix());
-    emitModRM(destination, a, b, MOD::INDIRECT_ADDRESSING);
+    emitMODRM(destination, a, b, MOD::INDIRECT_ADDRESSING);
 }
 
 void BaseEmitter::eADD(RefReg a, RefMem b){
     assertOperandSize(a, b);
     emitOpcode<3>(destination, a.getSizePrefix());
-    emitModSIBDisp(destination, b, a);
+    emitMODSIBDisp(destination, b, a);
 }
 
 void BaseEmitter::eADD(RefReg a, RefImm b){

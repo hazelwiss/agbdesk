@@ -44,12 +44,14 @@ namespace x64{
     //  Used for effective addressing
     enum class DispSize{ i8, i32 };
     struct Disp{
-        Disp() = default;
-        Disp(int64_t d) noexcept: size{(d < 256 && d > -128) ? DispSize::i8 : DispSize::i32}, disp{d} {}
-        int64_t getDisp() const noexcept { return size == DispSize::i8 ? (int8_t)disp : (int32_t)disp; }
-        DispSize size;
+        constexpr Disp() = default;
+        constexpr Disp(int64_t d) noexcept: size{(d <= INT8_MAX && d >= INT8_MIN) ? DispSize::i8 : DispSize::i32}, disp{d} {}
+        constexpr Disp& operator+=(const Disp& disp){ return *this = Disp(this->disp + disp.disp); }
+        constexpr Disp& operator-=(const Disp& disp){ return *this = Disp(this->disp - disp.disp); }
+        constexpr int64_t getDisp() const noexcept { return size == DispSize::i8 ? (int8_t)disp : (int32_t)disp; }
+        DispSize size{DispSize::i8};
     protected:
-        int64_t disp;
+        int64_t disp{0};
     };
 
     struct Address{
@@ -59,6 +61,7 @@ namespace x64{
         Address(size_t val) noexcept;
         Address&& operator+(RefReg RefReg);
         Address&& operator+(Disp val);
+        Address&& operator-(Disp val);
         Address&& operator*(size_t val);
         const SIB& getSIB() const noexcept { return sib; }
         const size_t getDispatch() const noexcept { return dispatch.getDisp(); }
@@ -84,10 +87,10 @@ namespace x64{
         protected:
             BaseMem::Group group;
         };
-        extern const Pointer qword;
-        extern const Pointer dword;
-        extern const Pointer word;
-        extern const Pointer byte;    //  unused?
+        extern const Pointer QWORD;
+        extern const Pointer DWORD;
+        extern const Pointer WORD;
+        extern const Pointer BYTE;    //  unused?
     }
 
     namespace Regs{
@@ -129,6 +132,7 @@ namespace x64{
             }
         }
         Address operator+(size_t val) const noexcept;
+        Address operator-(size_t val) const noexcept;
         Address operator+(RefReg RefReg) const noexcept;
         Address operator*(size_t val) const noexcept;
         friend Address operator+(size_t val, RefReg RefReg) noexcept;

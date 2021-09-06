@@ -19,9 +19,12 @@ namespace x64{
         return std::move(*this); 
     }
     Address&& Address::operator+(Disp val){ 
-        if(has_disp)
-            throw std::runtime_error(ErrStrings::INVEFFECTIVEADR);
-        dispatch = val;
+        dispatch += val;
+        has_disp = true;
+        return std::move(*this); 
+    }
+    Address&& Address::operator-(Disp val){ 
+        dispatch -= val;
         has_disp = true;
         return std::move(*this); 
     }

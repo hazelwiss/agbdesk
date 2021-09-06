@@ -26,6 +26,9 @@ namespace x64::Regs{
 Address GPR::operator+(size_t val) const noexcept { 
     return Address{*this} + val;
 }
+Address GPR::operator-(size_t val) const noexcept { 
+    return Address{*this} - val;
+}
 Address GPR::operator+(RefReg reg) const noexcept {  
     return Address(*this, 1) + reg;
 }
