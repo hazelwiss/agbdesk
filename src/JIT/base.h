@@ -1,13 +1,14 @@
 #pragma once
 #include<common.h>
+#include<cstring>
 
 struct EmitDestination{
     EmitDestination() noexcept = default;
     EmitDestination(uint8_t* data, size_t capacity) noexcept: data{data}, capacity{capacity} {}
-    void pushByte(uint8_t byte) noexcept        { *data++ = byte; }
-    void pushDByte(uint16_t dbyte) noexcept     { *((uint16_t*&)data)++ = dbyte; }
-    void pushQByte(uint32_t qbyte) noexcept     { *((uint32_t*&)data)++ = qbyte; }
-    void pushDQByte(uint64_t dqbyte) noexcept   { *((uint64_t*&)data)++ = dqbyte; }
+    void pushByte(uint8_t byte) noexcept        { std::memcpy(data++, &byte, sizeof(byte)); }
+    void pushDByte(uint16_t dbyte) noexcept     { std::memcpy(data, &dbyte, sizeof(dbyte)); data+= sizeof(dbyte); }
+    void pushQByte(uint32_t qbyte) noexcept     { std::memcpy(data, &qbyte, sizeof(qbyte)); data+= sizeof(qbyte);}
+    void pushDQByte(uint64_t dqbyte) noexcept   { std::memcpy(data, &dqbyte, sizeof(dqbyte)); data+= sizeof(dqbyte); }
 protected:
     uint8_t* data;
     size_t capacity;

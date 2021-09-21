@@ -69,7 +69,15 @@ void emitMODSIBDisp(EmitDestination& dest, RefMem mem, RefReg reg) {
             dest.pushByte(mem.adr.getDispatch());
         }
     } else{
+        if(mem.adr.hasDisp()){
+            if(mem.adr.hasDisp32()){
+                emitMODRM(dest, x64::Regs::EBP, );
+            } else{
 
+            }
+        } else{
+
+        }
     }
     //emitSIB(dest, mem.adr.getSIB());
 }

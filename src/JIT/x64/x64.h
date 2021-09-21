@@ -73,7 +73,7 @@ namespace x64{
         bool hasScale() const noexcept  { return has_sib_scale; }
         bool hasBase() const noexcept   { return has_sib_base; }
         bool hasIndex() const noexcept  { return has_sib_index; }
-        bool hasSIB() const noexcept { return hasScale() && hasBase() && hasIndex(); }
+        bool hasSIB() const noexcept { return hasIndex(); }
     protected:
         SIB sib;
         Disp dispatch;
